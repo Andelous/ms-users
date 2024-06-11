@@ -35,6 +35,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>ms-users</finalName>
+		<finalName>ms-users-service</finalName>
 	</build>
 </project>
