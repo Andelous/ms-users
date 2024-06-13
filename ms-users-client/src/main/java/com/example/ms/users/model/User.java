@@ -1,4 +1,4 @@
-package com.example.ms.users;
+package com.example.ms.users.model;
 
 import java.util.Objects;
 
