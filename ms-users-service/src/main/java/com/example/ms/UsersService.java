@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Path("users")
-public class Users {
-	private static final Logger LOGGER = LoggerFactory.getLogger(Users.class);
+public class UsersService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(UsersService.class);
 
 	@GET
 	@Produces("text/plain")
