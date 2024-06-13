@@ -1,7 +1,9 @@
-package com.example.ms;
+package com.example.ms.users;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.example.ms.users.User;
 
 public class UsersRepository {
 	private static final Map<String, User> MAP_USERS = new HashMap<>();

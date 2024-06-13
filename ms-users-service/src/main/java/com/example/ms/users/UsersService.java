@@ -1,4 +1,4 @@
-package com.example.ms;
+package com.example.ms.users;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
