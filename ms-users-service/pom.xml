@@ -33,12 +33,11 @@
 		<dependency>
 			<groupId>com.github.ben-manes.caffeine</groupId>
 			<artifactId>caffeine</artifactId>
-			<version>2.9.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.example.ms</groupId>
-			<artifactId>ms-users-client</artifactId>
+			<artifactId>ms-users-definition</artifactId>
 		</dependency>
 	</dependencies>
 

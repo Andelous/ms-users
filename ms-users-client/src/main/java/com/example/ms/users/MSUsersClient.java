@@ -1,5 +1,7 @@
 package com.example.ms.users;
 
+import javax.ws.rs.client.ClientBuilder;
+
 import com.example.ms.users.def.MSUsersDefinition;
 import com.example.ms.users.ex.ExistingUserException;
 import com.example.ms.users.ex.IncorrectPasswordException;
@@ -11,6 +13,7 @@ public class MSUsersClient implements MSUsersDefinition {
 	@Override
 	public void addUser(User user) throws ExistingUserException {
 		// TODO Auto-generated method stub
+		ClientBuilder.newClient();
 	}
 
 	@Override
