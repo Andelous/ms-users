@@ -6,9 +6,11 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -32,10 +34,8 @@ public class UsersService implements MSUsers {
 			.maximumSize(100).build();
 
 	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String meow() {
+	public void meow() {
 		LOGGER.info("Meow!!!");
-		return "I'm meowing!";
 	}
 
 	@POST
@@ -47,11 +47,17 @@ public class UsersService implements MSUsers {
 					null);
 		}
 
+		LOGGER.info("Registering new user [{}]", user.getUsername());
+
 		MAP_USERS.put(user.getUsername(), user);
 	}
 
+	@POST
+	@Path("auth")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
 	@Override
-	public String authenticateUser(String username, String password)
+	public String authenticateUser(@FormParam("username") String username, @FormParam("password") String password)
 			throws IncorrectPasswordException, IncorrectUsernameException {
 
 		User user = MAP_USERS.get(username);
@@ -70,8 +76,11 @@ public class UsersService implements MSUsers {
 		return uuidStr;
 	}
 
+	@GET
+	@Path("auth/{token}")
+	@Produces(MediaType.APPLICATION_JSON)
 	@Override
-	public User getUserByToken(String token) {
+	public User getUserByToken(@PathParam("token") String token) {
 		return CACHE_AUTH.getIfPresent(token);
 	}
 }
