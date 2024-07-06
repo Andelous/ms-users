@@ -11,10 +11,10 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>ms-users-service</artifactId>
+	<artifactId>ms-users-implementation</artifactId>
 	<packaging>war</packaging>
 
-	<name>Microservice: USERS Service</name>
+	<name>Microservice: USERS Implementation</name>
 
 	<dependencies>
 		<dependency>
@@ -49,6 +49,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>ms-users-service</finalName>
+		<finalName>ms-users-implementation</finalName>
 	</build>
 </project>

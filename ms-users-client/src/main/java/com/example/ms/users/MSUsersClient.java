@@ -21,6 +21,12 @@ import com.example.ms.users.def.ex.IncorrectUsernameException;
 import com.example.ms.users.def.ex.InvalidUserException;
 import com.example.ms.users.def.model.User;
 
+/**
+ * This client is used to connect to the users microservice through a REST API.
+ * 
+ * @see #MSUsersClient()
+ * @see #MSUsersClient(String, String, String)
+ */
 public class MSUsersClient implements MSUsers {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MSUsersClient.class);
 
@@ -29,11 +35,38 @@ public class MSUsersClient implements MSUsers {
 	private final WebTarget targetAddUser;
 	private final WebTarget targetAuthenticateUser;
 
+	/**
+	 * <p>
+	 * Creates a client taking defaults from the following JVM properties:
+	 * </p>
+	 * 
+	 * <ul>
+	 * <li><strong><code>msusers.uri</code></strong></li>
+	 * <li><strong><code>msusers.username</code></strong></li>
+	 * <li><strong><code>msusers.password</code></strong></li>
+	 * </ul>
+	 * 
+	 * <p>
+	 * Internally this constructor calls
+	 * {@link #MSUsersClient(String, String, String)}, passing the values from the
+	 * JVM properties.
+	 * </p>
+	 */
 	public MSUsersClient() {
 		this(System.getProperty("msusers.uri"), System.getProperty("msusers.username"),
 				System.getProperty("msusers.password"));
 	}
 
+	/**
+	 * Creates a client that connects to the users microservice.
+	 * 
+	 * @param baseURI    Host and path where the microservice is running. For
+	 *                   example: {@code http://localhost:8080/ms-users-service/}
+	 * @param msUsername Username that the microservice recognizes through HTTP
+	 *                   BASIC authentication.
+	 * @param msPassword Password that the microservice recognizes through HTTP
+	 *                   BASIC authentication.
+	 */
 	public MSUsersClient(String baseURI, String msUsername, String msPassword) {
 		client = ClientBuilder.newClient();
 

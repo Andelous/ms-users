@@ -25,7 +25,7 @@
 
 
 	<modules>
-		<module>ms-users-service</module>
+		<module>ms-users-implementation</module>
 		<module>ms-users-client</module>
 		<module>ms-users-definition</module>
 	</modules>

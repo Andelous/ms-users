@@ -6,6 +6,10 @@ import com.example.ms.users.def.ex.IncorrectUsernameException;
 import com.example.ms.users.def.ex.InvalidUserException;
 import com.example.ms.users.def.model.User;
 
+/**
+ * This interface describes the functionality that the users microservice must
+ * have.
+ */
 public interface MSUsers {
 	/**
 	 * Adds a user to the user repository.
