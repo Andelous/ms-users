@@ -7,10 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ApplicationPath("")
-public class UsersApp extends ResourceConfig {
-	private static final Logger LOGGER = LoggerFactory.getLogger(UsersApp.class);
+public class MSUsersApp extends ResourceConfig {
+	private static final Logger LOGGER = LoggerFactory.getLogger(MSUsersApp.class);
 
-	public UsersApp() {
+	public MSUsersApp() {
 		LOGGER.info("Initializing USERS APP class...");
 
 		packages("com.example.ms");

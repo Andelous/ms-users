@@ -27,7 +27,7 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
 @Path("users")
-public class UsersService implements MSUsers {
+public class MSUsersImplementation implements MSUsers {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MSUsers.class);
 
 	private static final Map<String, User> MAP_USERS = new HashMap<>();
