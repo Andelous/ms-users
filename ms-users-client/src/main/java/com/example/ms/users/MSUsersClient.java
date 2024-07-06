@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.Response.StatusType;
 
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,8 +29,16 @@ public class MSUsersClient implements MSUsers {
 	private final WebTarget targetAddUser;
 	private final WebTarget targetAuthenticateUser;
 
-	public MSUsersClient(String baseURI) {
+	public MSUsersClient() {
+		this(System.getProperty("msusers.uri"), System.getProperty("msusers.username"),
+				System.getProperty("msusers.password"));
+	}
+
+	public MSUsersClient(String baseURI, String msUsername, String msPassword) {
 		client = ClientBuilder.newClient();
+
+		HttpAuthenticationFeature authFeature = HttpAuthenticationFeature.basic(msUsername, msPassword);
+		client.register(authFeature);
 
 		targetBase = client.target(baseURI);
 		targetAddUser = targetBase.path("users");
