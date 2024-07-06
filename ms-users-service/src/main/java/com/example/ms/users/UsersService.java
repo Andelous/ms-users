@@ -21,6 +21,7 @@ import com.example.ms.users.def.MSUsers;
 import com.example.ms.users.def.ex.ExistingUserException;
 import com.example.ms.users.def.ex.IncorrectPasswordException;
 import com.example.ms.users.def.ex.IncorrectUsernameException;
+import com.example.ms.users.def.ex.InvalidUserException;
 import com.example.ms.users.def.model.User;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
@@ -41,7 +42,12 @@ public class UsersService implements MSUsers {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Override
-	public void addUser(User user) throws ExistingUserException {
+	public void addUser(User user) throws ExistingUserException, InvalidUserException {
+		if (user.getPassword() == null || user.getPassword().isEmpty() || user.getUsername() == null
+				|| user.getUsername().isEmpty())
+			throw new InvalidUserException(user.getUsername(),
+					"To register a user, both a USERNAME and a PASSWORD must be provided.", null);
+
 		if (MAP_USERS.containsKey(user.getUsername())) {
 			throw new ExistingUserException(user.getUsername(), "User already exists [" + user.getUsername() + "]",
 					null);

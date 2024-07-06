@@ -3,6 +3,7 @@ package com.example.ms.users.def;
 import com.example.ms.users.def.ex.ExistingUserException;
 import com.example.ms.users.def.ex.IncorrectPasswordException;
 import com.example.ms.users.def.ex.IncorrectUsernameException;
+import com.example.ms.users.def.ex.InvalidUserException;
 import com.example.ms.users.def.model.User;
 
 public interface MSUsers {
@@ -12,8 +13,10 @@ public interface MSUsers {
 	 * @param user User to be added. Not null.
 	 * @throws ExistingUserException When the user passed to this method already
 	 *                               exists (username must be unique).
+	 * @throws InvalidUserException  When the user passed to this method doesn't
+	 *                               have either a username or a password.
 	 */
-	public void addUser(User user) throws ExistingUserException;
+	public void addUser(User user) throws ExistingUserException, InvalidUserException;
 
 	/**
 	 * Authenticates a user by using the username and password.

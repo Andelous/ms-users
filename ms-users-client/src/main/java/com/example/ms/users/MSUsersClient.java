@@ -16,6 +16,7 @@ import com.example.ms.users.def.MSUsers;
 import com.example.ms.users.def.ex.ExistingUserException;
 import com.example.ms.users.def.ex.IncorrectPasswordException;
 import com.example.ms.users.def.ex.IncorrectUsernameException;
+import com.example.ms.users.def.ex.InvalidUserException;
 import com.example.ms.users.def.model.User;
 
 public class MSUsersClient implements MSUsers {
@@ -28,16 +29,14 @@ public class MSUsersClient implements MSUsers {
 
 	public MSUsersClient(String baseURI) {
 		client = ClientBuilder.newClient();
-		
-		client.register(JSO)
-		
+
 		targetBase = client.target(baseURI);
 		targetAddUser = targetBase.path("users");
 		targetAuthenticateUser = targetBase.path("users").path("auth");
 	}
 
 	@Override
-	public void addUser(User user) throws ExistingUserException {
+	public void addUser(User user) throws ExistingUserException, InvalidUserException {
 		Response response = targetAddUser.request(MediaType.TEXT_PLAIN)
 				.post(Entity.entity(user, MediaType.APPLICATION_JSON));
 
@@ -59,6 +58,9 @@ public class MSUsersClient implements MSUsers {
 
 			case "ExistingUserException":
 				throw new ExistingUserException(user.getUsername(), responseBody, null);
+
+			case "InvalidUserException":
+				throw new InvalidUserException(user.getUsername(), responseBody, null);
 
 			default:
 				throw new RuntimeException("UNRECOGNIZED EXCEPTION FROM SERVER [" + exceptionType + "]. Status code ["
@@ -82,10 +84,12 @@ public class MSUsersClient implements MSUsers {
 		return null;
 	}
 
-	public static void main(String[] args) throws ExistingUserException {
+	public static void main(String[] args) throws ExistingUserException, InvalidUserException {
 		MSUsersClient client = new MSUsersClient("http://localhost:8080/ms-users-service/");
 
-		User user = new User("andelous", "mexico2005");
+		User user = new User();
+		user.setUsername("nani");
+		user.setPassword("");
 
 		client.addUser(user);
 	}

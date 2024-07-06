@@ -14,5 +14,7 @@ public class UsersApp extends ResourceConfig {
 		LOGGER.info("Initializing USERS APP class...");
 
 		packages("com.example.ms");
+
+		LOGGER.info("Initialized USERS APP class successfully.");
 	}
 }
