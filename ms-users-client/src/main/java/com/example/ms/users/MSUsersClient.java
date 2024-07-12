@@ -1,5 +1,7 @@
 package com.example.ms.users;
 
+import java.util.Objects;
+
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -167,6 +169,8 @@ public class MSUsersClient implements MSUsers {
 
 	@Override
 	public User getUserByToken(String token) {
+		Objects.requireNonNull(token, "Token can't be null");
+
 		WebTarget target = targetAuthenticateUser.path(token);
 
 		Response response = target.request(MediaType.APPLICATION_JSON).get();
