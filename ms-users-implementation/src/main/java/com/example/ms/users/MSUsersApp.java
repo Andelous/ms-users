@@ -1,10 +1,10 @@
 package com.example.ms.users;
 
-import javax.ws.rs.ApplicationPath;
-
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import jakarta.ws.rs.ApplicationPath;
 
 @ApplicationPath("")
 public class MSUsersApp extends ResourceConfig {
