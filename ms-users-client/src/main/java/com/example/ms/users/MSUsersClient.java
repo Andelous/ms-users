@@ -70,6 +70,10 @@ public class MSUsersClient implements MSUsers {
 	 *                   BASIC authentication.
 	 */
 	public MSUsersClient(String baseURI, String msUsername, String msPassword) {
+		Objects.requireNonNull(baseURI, "The URI of the microservice can't be NULL.");
+		Objects.requireNonNull(msUsername, "The username of the microservice can't be NULL.");
+		Objects.requireNonNull(msPassword, "The password of the microservice can't be NULL.");
+
 		client = ClientBuilder.newClient();
 
 		HttpAuthenticationFeature authFeature = HttpAuthenticationFeature.basic(msUsername, msPassword);
