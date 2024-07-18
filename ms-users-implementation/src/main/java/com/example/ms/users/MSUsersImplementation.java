@@ -1,13 +1,12 @@
 package com.example.ms.users;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.example.ms.users.db.UsersRepository;
 import com.example.ms.users.def.MSUsers;
 import com.example.ms.users.def.ex.ExistingUserException;
 import com.example.ms.users.def.ex.IncorrectPasswordException;
@@ -30,7 +29,6 @@ import jakarta.ws.rs.core.MediaType;
 public class MSUsersImplementation implements MSUsers {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MSUsers.class);
 
-	private static final Map<String, User> MAP_USERS = new HashMap<>();
 	private static final Cache<String, User> CACHE_AUTH = Caffeine.newBuilder().expireAfterWrite(5, TimeUnit.MINUTES)
 			.maximumSize(100).build();
 
@@ -43,19 +41,23 @@ public class MSUsersImplementation implements MSUsers {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Override
 	public void addUser(User user) throws ExistingUserException, InvalidUserException {
+		if (user == null)
+			throw new InvalidUserException(null,
+					"The user can't be null -- please provide a correct JSON representation.", null);
+
 		if (user.getPassword() == null || user.getPassword().isEmpty() || user.getUsername() == null
 				|| user.getUsername().isEmpty())
 			throw new InvalidUserException(user.getUsername(),
 					"To register a user, both a USERNAME and a PASSWORD must be provided.", null);
 
-		if (MAP_USERS.containsKey(user.getUsername())) {
+		if (UsersRepository.exists(user.getUsername())) {
 			throw new ExistingUserException(user.getUsername(), "User already exists [" + user.getUsername() + "]",
 					null);
 		}
 
 		LOGGER.info("Registering new user [{}]", user.getUsername());
 
-		MAP_USERS.put(user.getUsername(), user);
+		UsersRepository.insert(user);
 	}
 
 	@POST
@@ -66,7 +68,7 @@ public class MSUsersImplementation implements MSUsers {
 	public String authenticateUser(@FormParam("username") String username, @FormParam("password") String password)
 			throws IncorrectPasswordException, IncorrectUsernameException {
 
-		User user = MAP_USERS.get(username);
+		User user = UsersRepository.select(username);
 
 		if (user == null)
 			throw new IncorrectUsernameException(username, "The user [" + username + "] doesn't exist", null);

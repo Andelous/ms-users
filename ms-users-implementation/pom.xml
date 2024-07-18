@@ -17,6 +17,8 @@
 	<name>Microservice: USERS Implementation</name>
 
 	<dependencies>
+
+
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-servlet</artifactId>
@@ -46,6 +48,23 @@
 			<groupId>com.example.ms</groupId>
 			<artifactId>ms-users-definition</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

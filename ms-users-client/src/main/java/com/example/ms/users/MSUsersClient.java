@@ -43,9 +43,9 @@ public class MSUsersClient implements MSUsers {
 	 * </p>
 	 * 
 	 * <ul>
-	 * <li><strong><code>msusers.uri</code></strong></li>
-	 * <li><strong><code>msusers.username</code></strong></li>
-	 * <li><strong><code>msusers.password</code></strong></li>
+	 * <li><strong><code>msusers.client.uri</code></strong></li>
+	 * <li><strong><code>msusers.client.username</code></strong></li>
+	 * <li><strong><code>msusers.client.password</code></strong></li>
 	 * </ul>
 	 * 
 	 * <p>
@@ -55,8 +55,8 @@ public class MSUsersClient implements MSUsers {
 	 * </p>
 	 */
 	public MSUsersClient() {
-		this(System.getProperty("msusers.uri"), System.getProperty("msusers.username"),
-				System.getProperty("msusers.password"));
+		this(System.getProperty("msusers.client.uri"), System.getProperty("msusers.client.username"),
+				System.getProperty("msusers.client.password"));
 	}
 
 	/**
