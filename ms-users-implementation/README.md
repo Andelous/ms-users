@@ -2,8 +2,8 @@
 This is the REST implementation of the users microservice.
 
 Prior to running the microservice, you need to complete the next steps:
-1. [Have your own DB!](#DB%20configuration)
-2. [Provide the JDBC URL and Driver to the app](#JDBC%20URL%20and%20Driver)
+1. [Have your own DB!](#db-configuration)
+2. [Provide the JDBC URL and Driver to the app](#jdbc-url-and-driver)
 3. Run the microservice `:)`
 
 ### DB Configuration
