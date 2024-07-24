@@ -21,7 +21,6 @@ import jakarta.ws.rs.core.Form;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import jakarta.ws.rs.core.Response.StatusType;
 
 /**
  * This client is used to connect to the users microservice through a REST API.
@@ -89,7 +88,7 @@ public class MSUsersClient implements MSUsers {
 		Response response = targetAddUser.request(MediaType.TEXT_PLAIN)
 				.post(Entity.entity(user, MediaType.APPLICATION_JSON));
 
-		StatusType status = response.getStatusInfo();
+		Status status = response.getStatusInfo().toEnum();
 		String exceptionType = response.getHeaderString("Exception-Type");
 		String responseBody = response.readEntity(String.class);
 
@@ -134,7 +133,7 @@ public class MSUsersClient implements MSUsers {
 		Response response = targetAuthenticateUser.request(MediaType.TEXT_PLAIN)
 				.post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
 
-		StatusType status = response.getStatusInfo();
+		Status status = response.getStatusInfo().toEnum();
 		String exceptionType = response.getHeaderString("Exception-Type");
 		String responseBody = response.readEntity(String.class);
 
@@ -179,7 +178,7 @@ public class MSUsersClient implements MSUsers {
 
 		Response response = target.request(MediaType.APPLICATION_JSON).get();
 
-		StatusType status = response.getStatusInfo();
+		Status status = response.getStatusInfo().toEnum();
 
 		boolean isSuccess = status == Status.ACCEPTED || status == Status.OK || status == Status.NO_CONTENT;
 		boolean isServerError = !isSuccess;
