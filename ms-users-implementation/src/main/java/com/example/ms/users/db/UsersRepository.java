@@ -12,6 +12,7 @@ import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.example.ms.users.MSUsersApp;
 import com.example.ms.users.def.model.User;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -28,8 +29,8 @@ public class UsersRepository {
 		 */
 		LOGGER.info("Initializing DataSource...");
 
-		String jdbcURL = System.getProperty("msusers.jdbc.url");
-		String driver = System.getProperty("msusers.jdbc.driver");
+		String jdbcURL = MSUsersApp.getApplicationProperties().getProperty("msusers.jdbc.url");
+		String driver = MSUsersApp.getApplicationProperties().getProperty("msusers.jdbc.driver");
 
 		HikariConfig config = new HikariConfig();
 		config.setJdbcUrl(jdbcURL);
@@ -54,6 +55,10 @@ public class UsersRepository {
 		SSF_DEFAULT = new SqlSessionFactoryBuilder().build(configuration);
 
 		LOGGER.info("MyBatis initialized successfully");
+	}
+
+	public static void init() {
+		// Empty body, to call the initialization static block.
 	}
 
 	public static User select(String username) {
